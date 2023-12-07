@@ -1,19 +1,19 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final novela = novelaFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Novela> welcomeFromJson(String str) => List<Novela>.from(json.decode(str).map((x) => Novela.fromJson(x)));
+List<Novela> novelaFromJson(String str) => List<Novela>.from(json.decode(str).map((x) => Novela.fromJson(x)));
 
-String welcomeToJson(List<Novela> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String novelaToJson(List<Novela> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Novela {
     final int id;
     final String name;
     final String description;
     final String image;
-    final Chapters chapters;
+    final Map<String, Chapter> chapters;
 
     Novela({
         required this.id,
@@ -28,7 +28,7 @@ class Novela {
         name: json["name"],
         description: json["description"],
         image: json["image"],
-        chapters: Chapters.fromJson(json["chapters"]),
+        chapters: Map.from(json["chapters"]).map((k, v) => MapEntry<String, Chapter>(k, Chapter.fromJson(v))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -36,42 +36,58 @@ class Novela {
         "name": name,
         "description": description,
         "image": image,
-        "chapters": chapters.toJson(),
+        "chapters": Map.from(chapters).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
     };
 }
 
-class Chapters {
-    final Novela2 the1;
+class Chapter {
+    final Title title;
+    final Contenido contenido;
 
-    Chapters({
-        required this.the1,
-    });
-
-    factory Chapters.fromJson(Map<String, dynamic> json) => Chapters(
-        the1: Novela2.fromJson(json["1"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "1": the1.toJson(),
-    };
-}
-
-class Novela2 {
-    final String title;
-    final String contenido;
-
-    Novela2({
+    Chapter({
         required this.title,
         required this.contenido,
     });
 
-    factory Novela2.fromJson(Map<String, dynamic> json) => Novela2(
-        title: json["title"],
-        contenido: json["contenido"],
+    factory Chapter.fromJson(Map<String, dynamic> json) => Chapter(
+        title: titleValues.map[json["title"]]!,
+        contenido: contenidoValues.map[json["contenido"]]!,
     );
 
     Map<String, dynamic> toJson() => {
-        "title": title,
-        "contenido": contenido,
+        "title": titleValues.reverse[title],
+        "contenido": contenidoValues.reverse[contenido],
     };
+}
+
+enum Contenido {
+    CONTENIDO_DEL_CAPITULO
+}
+
+final contenidoValues = EnumValues({
+    "Contenido del capitulo... ": Contenido.CONTENIDO_DEL_CAPITULO
+});
+
+enum Title {
+    CAPITULO_1,
+    CAPITULO_2,
+    CAPITULO_3
+}
+
+final titleValues = EnumValues({
+    "Capitulo 1": Title.CAPITULO_1,
+    "Capitulo 2": Title.CAPITULO_2,
+    "Capitulo 3": Title.CAPITULO_3
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        reverseMap = map.map((k, v) => MapEntry(v, k));
+        return reverseMap;
+    }
 }
