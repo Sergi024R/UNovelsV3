@@ -1,19 +1,19 @@
 // To parse this JSON data, do
 //
-//     final novela = novelaFromJson(jsonString);
+//     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Novela> novelaFromJson(String str) => List<Novela>.from(json.decode(str).map((x) => Novela.fromJson(x)));
+List<Novela> welcomeFromJson(String str) => List<Novela>.from(json.decode(str).map((x) => Novela.fromJson(x)));
 
-String novelaToJson(List<Novela> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String welcomeToJson(List<Novela> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Novela {
     final int id;
     final String name;
     final String description;
     final String image;
-    final Map<String, Chapter> chapters;
+    final Chapters chapters;
 
     Novela({
         required this.id,
@@ -28,30 +28,44 @@ class Novela {
         name: json["name"],
         description: json["description"],
         image: json["image"],
-        chapters: Map.from(json["chapters"]).map((k, v) => MapEntry<String, Chapter>(k, Chapter.fromJson(v))),
+        chapters: Chapters.fromJson(json["chapters"]),
     );
-
-  List<Novela>? get data => null;
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
         "image": image,
-        "chapters": Map.from(chapters).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "chapters": chapters.toJson(),
     };
 }
 
-class Chapter {
+class Chapters {
+    final Novela2 the1;
+
+    Chapters({
+        required this.the1,
+    });
+
+    factory Chapters.fromJson(Map<String, dynamic> json) => Chapters(
+        the1: Novela2.fromJson(json["1"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "1": the1.toJson(),
+    };
+}
+
+class Novela2 {
     final String title;
     final String contenido;
 
-    Chapter({
+    Novela2({
         required this.title,
         required this.contenido,
     });
 
-    factory Chapter.fromJson(Map<String, dynamic> json) => Chapter(
+    factory Novela2.fromJson(Map<String, dynamic> json) => Novela2(
         title: json["title"],
         contenido: json["contenido"],
     );
