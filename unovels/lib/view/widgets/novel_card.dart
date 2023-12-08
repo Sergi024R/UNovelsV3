@@ -95,13 +95,18 @@ class CapituloScreen extends StatefulWidget {
 }
 
 class _CapituloScreenState extends State<CapituloScreen> {
-  int _currentChapterIndex = 0;
+  final int _currentChapterIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const WidgetDrawer(),
       appBar: AppBar(
-        title: Text(widget.novela.name),
+        title: Text(
+          widget.novela.name,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
       ),
       body: ListView.builder(
         itemCount: widget.novela.chapters.length,
@@ -110,7 +115,7 @@ class _CapituloScreenState extends State<CapituloScreen> {
           return Card(
               child: ListTile(
             title: Text(chapter.title.toString().split('.').last),
-           // subtitle: Text(chapter.contenido.toString().split('.').last),
+            // subtitle: Text(chapter.contenido.toString().split('.').last),
             onTap: () {
               // Navegar a la pantalla de contenido del capítulo
               Navigator.push(
@@ -140,9 +145,13 @@ class CapituloContentScreen extends StatelessWidget {
         novela.chapters.values.toList()[currentChapterIndex];
 
     return Scaffold(
-      drawer: WidgetDrawer(),
+      drawer: const WidgetDrawer(),
       appBar: AppBar(
-        title: Text(currentChapter.title),
+        title: Text(
+          currentChapter.title,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -152,7 +161,7 @@ class CapituloContentScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   'Contenido del capítulo: ${currentChapter.contenido}',
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -165,8 +174,8 @@ class CapituloContentScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CapituloContentScreen(novela, currentChapterIndex - 1),
+                              builder: (context) => CapituloContentScreen(
+                                  novela, currentChapterIndex - 1),
                             ),
                           );
                         }
@@ -183,7 +192,8 @@ class CapituloContentScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: Icon(Icons.menu), // Puedes cambiar el icono según tus preferencias
+                  icon: const Icon(Icons
+                      .list_alt), // Puedes cambiar el icono según tus preferencias
                 ),
                 ElevatedButton(
                   onPressed: currentChapterIndex < novela.chapters.length - 1
@@ -191,8 +201,8 @@ class CapituloContentScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CapituloContentScreen(novela, currentChapterIndex + 1),
+                              builder: (context) => CapituloContentScreen(
+                                  novela, currentChapterIndex + 1),
                             ),
                           );
                         }
@@ -207,33 +217,3 @@ class CapituloContentScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// class CapituloScreen extends StatelessWidget {
-//   final Novela novela;
-
-//   CapituloScreen(this.novela);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(novela.name),
-//       ),
-//       body: ListView.builder(
-//         itemCount: novela.chapters.length,
-//         itemBuilder: (context, index) {
-//           final chapter = novela.chapters.values.toList()[index];
-//           return Card(
-//             child: ListTile(
-//               title: Text(chapter.title.toString().split('.').last),
-//               subtitle: Text(chapter.contenido.toString().split('.').last),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
