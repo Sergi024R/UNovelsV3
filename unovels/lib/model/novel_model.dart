@@ -41,8 +41,8 @@ class Novela {
 }
 
 class Chapter {
-    final Title title;
-    final Contenido contenido;
+    final String title;
+    final String contenido;
 
     Chapter({
         required this.title,
@@ -50,44 +50,12 @@ class Chapter {
     });
 
     factory Chapter.fromJson(Map<String, dynamic> json) => Chapter(
-        title: titleValues.map[json["title"]]!,
-        contenido: contenidoValues.map[json["contenido"]]!,
+        title: json["title"],
+        contenido: json["contenido"],
     );
 
     Map<String, dynamic> toJson() => {
-        "title": titleValues.reverse[title],
-        "contenido": contenidoValues.reverse[contenido],
+        "title": title,
+        "contenido": contenido,
     };
-}
-
-enum Contenido {
-    CONTENIDO_DEL_CAPITULO
-}
-
-final contenidoValues = EnumValues({
-    "Contenido del capitulo... ": Contenido.CONTENIDO_DEL_CAPITULO
-});
-
-enum Title {
-    CAPITULO_1,
-    CAPITULO_2,
-    CAPITULO_3
-}
-
-final titleValues = EnumValues({
-    "Capitulo 1": Title.CAPITULO_1,
-    "Capitulo 2": Title.CAPITULO_2,
-    "Capitulo 3": Title.CAPITULO_3
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }

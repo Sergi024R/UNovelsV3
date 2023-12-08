@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/view/widgets/novel_card.dart';
-import '../widgets/novel_list.dart';
 import '../widgets/widget_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
