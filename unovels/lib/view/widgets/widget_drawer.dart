@@ -73,7 +73,7 @@ class WidgetDrawer extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Categorias(),
+                            builder: (context) => Categorias(),
                           ),
                         );
                       },

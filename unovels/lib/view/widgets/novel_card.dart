@@ -33,7 +33,6 @@ class NovelCard extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
-                // La carga de datos fue exitosa, muestra la lista
                 List<Novela> novelas = snapshot.data as List<Novela>;
 
                 return ListView.builder(
@@ -47,16 +46,11 @@ class NovelCard extends StatelessWidget {
                           children: [
                             Image.network(
                               novela.image,
-                              width:
-                                  220, // Ancho de la imagen que ocupa todo el ancho del ListTile
-                              height:
-                                  290.0, // Altura de la imagen según tus necesidades
-                              fit: BoxFit
-                                  .cover, // Ajusta el contenido de la imagen
+                              width: 220,
+                              height: 290.0,
+                              fit: BoxFit.cover,
                             ),
-                            const SizedBox(
-                                height:
-                                    1.0), // Espaciado entre la imagen y el texto
+                            const SizedBox(height: 1.0),
                             Text(
                               novela.name,
                               style: const TextStyle(
@@ -115,9 +109,7 @@ class _CapituloScreenState extends State<CapituloScreen> {
           return Card(
               child: ListTile(
             title: Text(chapter.title.toString().split('.').last),
-            // subtitle: Text(chapter.contenido.toString().split('.').last),
             onTap: () {
-              // Navegar a la pantalla de contenido del capítulo
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -184,7 +176,6 @@ class CapituloContentScreen extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    // Navegar a la lista de capítulos
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -192,8 +183,7 @@ class CapituloContentScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: const Icon(Icons
-                      .list_alt), // Puedes cambiar el icono según tus preferencias
+                  icon: const Icon(Icons.list_alt),
                 ),
                 ElevatedButton(
                   onPressed: currentChapterIndex < novela.chapters.length - 1
