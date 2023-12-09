@@ -125,7 +125,7 @@ class CategoriasLista extends StatelessWidget {
 }
 
 Future<List<Novela>> fetchDataForCategoria(String categoria) async {
-  final apiUrl = 'http://192.168.1.89/api/novelas';
+  final apiUrl = 'https://unovelsapi.onrender.com/api/novelas';
 
   try {
     final response = await http.get(Uri.parse(apiUrl));

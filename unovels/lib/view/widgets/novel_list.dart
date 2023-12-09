@@ -19,7 +19,7 @@ class NovelListState extends State<NovelList> {
   }
 
   Future<Novela> getNovela() async {
-    final response = await Dio().get('http://localhost:80/api/novelas');
+    final response = await Dio().get('https://unovelsapi.onrender.com/api/novelas');
     return Novela.fromJson(response.data[0]);
   }
 

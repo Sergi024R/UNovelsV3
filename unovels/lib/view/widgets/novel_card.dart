@@ -8,7 +8,7 @@ class NovelCard extends StatelessWidget {
   const NovelCard({super.key});
 
   // URL de API
-  final String apiUrl = 'http://192.168.1.89/api/novelas';
+  final String apiUrl = 'https://unovelsapi.onrender.com/api/novelas';
 
   Future<List<Novela>> _fetchNovelas() async {
     final response = await http.get(Uri.parse(apiUrl));
