@@ -1,5 +1,6 @@
-import 'package:flutter_firebase/config/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../theme/app_theme.dart';
 
 // Listado de colores inmutable
 final colorListProvider = Provider((ref) => colorList);

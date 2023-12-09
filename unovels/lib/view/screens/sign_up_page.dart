@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/features/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
-import 'package:flutter_firebase/view/screens/login_page.dart';
-import 'package:flutter_firebase/view/widgets/form_container_widget.dart';
-import 'package:flutter_firebase/global/common/toast.dart';
+
+import '../../features/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
+import '../../global/common/toast.dart';
+import '../widgets/form_container_widget.dart';
+import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -48,7 +49,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   const Text(
                     "Sign Up",
-                    style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 27,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                   const SizedBox(
                     height: 30,
@@ -107,7 +111,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Already have an account?", style: TextStyle(color: Colors.white),),
+                      const Text(
+                        "Already have an account?",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
@@ -122,7 +129,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: const Text(
                             "Login",
                             style: TextStyle(
-                                color: Colors.blue, fontWeight: FontWeight.bold),
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
                           ))
                     ],
                   )

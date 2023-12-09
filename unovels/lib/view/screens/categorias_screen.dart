@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/view/widgets/widget_drawer.dart';
 import 'package:http/http.dart' as http;
 import '../../model/novel_model.dart';
 import '../widgets/novel_card.dart';
+import '../widgets/widget_drawer.dart';
 
 class Categorias extends StatelessWidget {
   const Categorias({super.key});

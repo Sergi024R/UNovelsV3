@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/view/widgets/widget_drawer.dart';
 import '../../model/novel_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'widget_drawer.dart';
 
 class NovelCard extends StatelessWidget {
   const NovelCard({super.key});

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/view/screens/categorias_screen.dart';
-import 'package:flutter_firebase/view/screens/home_screen.dart';
-import 'package:flutter_firebase/view/screens/user_info.dart';
+
+import '../screens/categorias_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/user_info.dart';
+
 
 class WidgetDrawer extends StatelessWidget {
   const WidgetDrawer({
@@ -53,7 +55,7 @@ class WidgetDrawer extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const UserInfo(),
+                            builder: (context) => UserInfo(),
                           ),
                         );
                       },
